@@ -1,7 +1,6 @@
-from pyassistant.speak import speak
 
-def Hello():
+def hello():
 	# This function is for when the assistant
 	# is called it will say hello and then
 	# take query
-	speak("hello sir I am your desktop assistant. Tell me how may I help you. IHIHIHIHIHI")
+	return ("Ciao! sono il tuo assitente vocale. Sono matto frollo IHIHIHIHIHI")

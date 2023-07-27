@@ -1,10 +1,13 @@
 from pyassistant.aigpt import ask_question
-from pyassistant.speak import speak
+from pyassistant.speaker import Speaker
 from pyassistant.method import hello, takeCommand, tellTime
 import wikipedia
 import webbrowser
 
 def Take_query():
+	# Initialize the Speaker
+	speaker = Speaker()
+	speaker.init()
 
 	# calling the Hello function for
 	# making it more interactive
@@ -20,50 +23,47 @@ def Take_query():
 		# lower case so that most of the times
 		# query matches and we get the perfect
 		# output
-		query = takeCommand.takeCommand().lower()
-		if query != "none":
-			speak(ask_question(query))
-
-		# if "open geeksforgeeks" in query:
-		# 	speak("Opening GeeksforGeeks ")
+		print("Waining activating word...")
+		if takeCommand.takeCommand().lower() == "jarvis":
+			query = takeCommand.takeCommand().lower()
+			if "ciao" in query:
+				speaker.speak(hello.hello())
 			
-		# 	# in the open method we just to give the link
-		# 	# of the website and it automatically open
-		# 	# it in your default browser
-		# 	webbrowser.open("www.geeksforgeeks.com")
-		# 	continue
-		
-		# elif "open google" in query:
-		# 	speak("Opening Google ")
-		# 	webbrowser.open("www.google.com")
-		# 	continue
+			elif "apri google" in query:
+				speaker.speak("Opening Google ")
+				webbrowser.open("www.google.com")
+				continue
+				
+			elif "which day it is" in query:
+				# tellDay()
+				continue
 			
-		# elif "which day it is" in query:
-		# 	# tellDay()
-		# 	continue
-		
-		# elif "tell me the time" in query:
-		# 	tellTime()
-		# 	continue
-		
-		# # this will exit and terminate the program
-		# elif "bye" in query:
-		# 	speak("Bye. Check Out GFG for more exciting things")
-		# 	exit()
-		
-		# elif "from wikipedia" in query:
+			elif "orario" in query:
+				speaker.speak(tellTime.tellTime())
+				continue
 			
-		# 	# if any one wants to have a information
-		# 	# from wikipedia
-		# 	speak("Checking the wikipedia ")
-		# 	query = query.replace("wikipedia", "")
+			# this will exit and terminate the program
+			elif "bye" in query:
+				speaker.speak("Bye. Check Out GFG for more exciting things")
+				exit()
 			
-		# 	# it will give the summary of 4 lines from
-		# 	# wikipedia we can increase and decrease
-		# 	# it also.
-		# 	result = wikipedia.summary(query, sentences=4)
-		# 	speak("According to wikipedia")
-		# 	speak(result)
-		
-		# elif "tell me your name" in query:
-		# 	speak("I am Jarvis. L'assistente matto frollo")
+			elif "da wikipedia" in query:
+				
+				# if any one wants to have a information
+				# from wikipedia
+				speaker.speak("Checking the wikipedia ")
+				query = query.replace("da wikipedia ", "")
+				
+				# it will give the summary of 4 lines from
+				# wikipedia we can increase and decrease
+				# it also.
+				result = wikipedia.summary(query, sentences=4)
+				speaker.speak("According to wikipedia")
+				speaker.speak(result)
+			
+			elif "tell me your name" in query:
+				speaker.speak("I am Jarvis. L'assistente matto frollo")
+			elif query != "none":
+				speaker.speak(ask_question(query))
+			else:
+				speaker.speak("non ho capito")
