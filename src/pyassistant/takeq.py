@@ -23,47 +23,54 @@ def Take_query():
 		# lower case so that most of the times
 		# query matches and we get the perfect
 		# output
-		print("Waining activating word...")
-		if takeCommand.takeCommand().lower() == "jarvis":
-			query = takeCommand.takeCommand().lower()
-			if "ciao" in query:
-				speaker.speak(hello.hello())
+		# print("Waining activating word...")
+		# if takeCommand.takeCommand().lower() == "jarvis":
+		query = takeCommand.takeCommand().lower()
+		if "arrivederci" in query:
+			speaker.speak("Bella, vado a dormire!")
+			exit()
+		elif "come stai" in query:
+			print(hello.howareyou())
+			speaker.speak(hello.howareyou())
+		elif "sei il migliore" in query:
+			print(hello.thebest())
+			speaker.speak(hello.thebest())
+		elif "apri google" in query:
+			speaker.speak("Opening Google ")
+			webbrowser.open("www.google.com")
+			continue
 			
-			elif "apri google" in query:
-				speaker.speak("Opening Google ")
-				webbrowser.open("www.google.com")
-				continue
-				
-			elif "which day it is" in query:
-				# tellDay()
-				continue
+		elif "which day it is" in query:
+			# tellDay()
+			continue
+		
+		elif "orario" in query:
+			speaker.speak(tellTime.tellTime())
+			continue
+		
+		# this will exit and terminate the program
+		elif "ciao" in query:
+			speaker.speak(hello.hello())
+		
+		elif "da wikipedia" in query:
 			
-			elif "orario" in query:
-				speaker.speak(tellTime.tellTime())
-				continue
+			# if any one wants to have a information
+			# from wikipedia
+			speaker.speak("Checking the wikipedia ")
+			query = query.replace("da wikipedia ", "")
 			
-			# this will exit and terminate the program
-			elif "bye" in query:
-				speaker.speak("Bye. Check Out GFG for more exciting things")
-				exit()
-			
-			elif "da wikipedia" in query:
-				
-				# if any one wants to have a information
-				# from wikipedia
-				speaker.speak("Checking the wikipedia ")
-				query = query.replace("da wikipedia ", "")
-				
-				# it will give the summary of 4 lines from
-				# wikipedia we can increase and decrease
-				# it also.
-				result = wikipedia.summary(query, sentences=4)
-				speaker.speak("According to wikipedia")
-				speaker.speak(result)
-			
-			elif "tell me your name" in query:
-				speaker.speak("I am Jarvis. L'assistente matto frollo")
-			elif query != "none":
-				speaker.speak(ask_question(query))
-			else:
-				speaker.speak("non ho capito")
+			# it will give the summary of 4 lines from
+			# wikipedia we can increase and decrease
+			# it also.
+			result = wikipedia.summary(query, sentences=4)
+			speaker.speak("According to wikipedia")
+			speaker.speak(result)
+		
+		elif "chi sei" in query:
+			speaker.speak("Sono Jarvis. L'assistente del matto frollo")
+		# elif "ai" in query:
+		elif query != "none":
+			speaker.speak(ask_question(query))
+			# speaker.speak("non ho capito")
+		else:
+			pass
